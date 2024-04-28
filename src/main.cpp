@@ -54,13 +54,61 @@ bool check_tanks_collision()
     base::debug::print_vector_of_points(collide_with_water,
                                         "collide_with_water");
 
+    std::cout << (int)(collide_with_bricks.empty() ||
+                       collide_with_unbreaking_bricks.empty() ||
+                       collide_with_water.empty())
+              << std::endl;
     return collide_with_bricks != std::vector<std::pair<int, int>>{} ||
            collide_with_unbreaking_bricks !=
                std::vector<std::pair<int, int>>{} ||
            collide_with_water != std::vector<std::pair<int, int>>{};
 }
 
-void render_map(sf::RenderWindow* window) {}
+void render_map(sf::RenderWindow* window)
+{
+    sf::Sprite sprite_grass(tex_grass);
+    sprite_grass.setScale(config::cell_size_x / 16., config::cell_size_y / 16.);
+    for (const auto& point : grass)
+    {
+        sprite_grass.setPosition(point.first * config::cell_size_x,
+                                 point.second * config::cell_size_y);
+
+        base::api::render_sprite(window, sprite_grass);
+    }
+
+    sf::Sprite sprite_unbreak_brick(tex_unbreak_brick);
+    sprite_unbreak_brick.setScale(config::cell_size_x / 16.,
+                                  config::cell_size_y / 16.);
+
+    for (const auto& point : unbreak_bricks)
+    {
+        sprite_unbreak_brick.setPosition(point.first * config::cell_size_x,
+                                         point.second * config::cell_size_y);
+
+        base::api::render_sprite(window, sprite_unbreak_brick);
+    }
+
+    sf::Sprite sprite_water(tex_water);
+    sprite_water.setScale(config::cell_size_x / 16., config::cell_size_y / 16.);
+    for (const auto& point : water)
+    {
+        sprite_water.setPosition(point.first * config::cell_size_x,
+                                 point.second * config::cell_size_y);
+
+        base::api::render_sprite(window, sprite_water);
+    }
+}
+
+void render_tanks(sf::RenderWindow* window)
+{
+    sf::Sprite sprite_tank(tex_tank);
+    sprite_tank.setScale(config::cell_size_x / 11., config::cell_size_y / 16.);
+
+    sprite_tank.setPosition(player_tank.first * config::cell_size_x,
+                            player_tank.second * config::cell_size_y);
+
+    base::api::render_sprite(window, sprite_tank);
+}
 
 int main()
 {
