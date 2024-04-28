@@ -27,9 +27,16 @@ enum game_state
 
 enum file_permission
 {
-    read   = 1 << 0,
-    write  = 1 << 1,
-    append = 1 << 2
+    read,             // only read
+    write,            // only write (erase all content of file)
+    append,           // write append to end of file
+    read_byte,        // like read, but in byte mode
+    write_byte,       // like write, but in byte mode
+    append_byte,      // like append, but in byte mode
+    read_write,       // like write, but u can read
+    read_append,      // like append, but u can read
+    read_write_byte,  // like read_write, but in byte mode
+    read_append_byte, // like read_append, but in byte mode
 };
 
 enum cell_type
