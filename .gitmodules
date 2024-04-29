@@ -1,3 +1,0 @@
-[submodule "modules/underscore"]
-	path = modules/underscore
-	url = git@github.com:cromo/underscore.cpp.git
