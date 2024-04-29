@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.28)
 
-set (CMAKE_CXX_STANDARD 11)
 project(Tanchiki CXX C)
+
+list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
 add_subdirectory(modules)
 add_subdirectory(src)

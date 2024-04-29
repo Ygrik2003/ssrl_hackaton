@@ -1,16 +1,15 @@
 cmake_minimum_required(VERSION 3.28)
 
-add_subdirectory(api)
-add_subdirectory(game)
+find_package(functions)
 
-add_executable(tanks main.cpp)
-target_link_libraries(tanks PRIVATE game::api game::game)
+# add_subdirectory(api)
+# add_subdirectory(game)
 
-# Add symlink to /misc dir
-add_custom_command(
-    TARGET tanks
-    POST_BUILD
-    COMMAND
-        ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/res
-        ${CMAKE_CURRENT_BINARY_DIR}/res DEPENDS ${destination}
-    COMMENT "symbolic link resources folder from ${source} => ${destination}")
+add_executable(tanks_game_online main.cxx)
+yg_add_resource_folder(
+    TARGETS
+    tanks_game_online
+    RESOURCES
+    ${CMAKE_SOURCE_DIR}/data)
+
+# target_link_libraries(tanks PRIVATE game::api game::game)
