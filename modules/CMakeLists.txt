@@ -1,4 +1,12 @@
 cmake_minimum_required(VERSION 3.28)
 
-add_library(underscore INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/underscore/lib/underscore.h)
-target_include_directories(underscore INTERFACE ${CMAKE_CURRENT_LIST_DIR}/underscore/lib/)
+add_subdirectory(glm)
+
+# set(SDL_DIR ${CMAKE_CURRENT_BINARY_DIR}/SDL
+set(SDL_DIR ${CMAKE_CURRENT_LIST_DIR}/bin/${CMAKE_SYSTEM_NAME}/SDL
+    CACHE INTERNAL "SDL binary dir")
+if(YG_MODULE_SDL_REBUILD OR NOT EXISTS ${SDL_DIR})
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/SDL)
+    set(CMAKE_INSTALL_PREFIX ${SDL_DIR} PARENT_SCOPE)
+    install(TARGETS SDL3-shared DESTINATION ${SDL_DIR})
+endif()

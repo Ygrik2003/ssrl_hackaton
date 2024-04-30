@@ -36,7 +36,5 @@ function(yg_add_resource_folder)
                     "symbolic link resources folder from ${CMAKE_CURRENT_SOURCE_DIR}/data => ${CMAKE_CURRENT_BINARY_DIR}/res"
                 )
         endforeach()
-
     endforeach()
-
 endfunction()

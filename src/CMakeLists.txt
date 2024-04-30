@@ -12,4 +12,4 @@ yg_add_resource_folder(
     RESOURCES
     ${CMAKE_SOURCE_DIR}/data)
 
-# target_link_libraries(tanks PRIVATE game::api game::game)
+target_link_libraries(tanks_game_online PRIVATE SDL3::SDL3-shared)
