@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 
 find_package(functions)
 
-# add_subdirectory(api)
+# add_subdirectory(engine)
 # add_subdirectory(game)
 
 add_executable(tanks_game_online main.cxx)
