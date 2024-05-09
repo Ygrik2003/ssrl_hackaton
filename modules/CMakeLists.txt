@@ -1,12 +1,37 @@
 cmake_minimum_required(VERSION 3.28)
 
-add_subdirectory(glm)
+find_package(Vulkan REQUIRED)
 
-# set(SDL_DIR ${CMAKE_CURRENT_BINARY_DIR}/SDL
-set(SDL_DIR ${CMAKE_CURRENT_LIST_DIR}/bin/${CMAKE_SYSTEM_NAME}/SDL
-    CACHE INTERNAL "SDL binary dir")
-if(YG_MODULE_SDL_REBUILD OR NOT EXISTS ${SDL_DIR})
-    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/SDL)
-    set(CMAKE_INSTALL_PREFIX ${SDL_DIR} PARENT_SCOPE)
-    install(TARGETS SDL3-shared DESTINATION ${SDL_DIR})
-endif()
+set(CMAKE_BUILD_TYPE Release)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/SDL)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/glm)
+
+#imgui
+set(imgui_src
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/imconfig.h
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/imgui_demo.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/imgui_draw.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/imgui_internal.h
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/imgui_tables.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/imgui_widgets.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/imgui.h
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/imstb_rectpack.h
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/imstb_textedit.h
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/imstb_truetype.h)
+
+set(imgui_backand_src
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_sdl3.h
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_sdl3.cpp
+    # ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl2.h
+    # ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl2.cpp
+    # ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl3_loader.h
+    # ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl3.h
+    # ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl3.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_vulkan.h
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_vulkan.cpp)
+
+add_library(imgui STATIC ${imgui_src} ${imgui_backand_src})
+target_include_directories(imgui PUBLIC ${CMAKE_CURRENT_LIST_DIR}/imgui)
+target_link_libraries(imgui PRIVATE SDL3::SDL3-shared Vulkan::Vulkan)
+set_target_properties(imgui PROPERTIES POSITION_INDEPENDENT_CODE ON)
+add_library(imgui::imgui ALIAS imgui)
