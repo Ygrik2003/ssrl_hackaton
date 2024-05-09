@@ -1,18 +1,23 @@
-#include <window/window_manager.hxx>
+#include "window/render/render_context_opengl.hxx"
+#include "window/window_manager.hxx"
+#include "window/window_sdl.hxx"
 
 #if defined(YG_ENGINE_MAIN)
 
 int main()
 {
     yg::window_config wnd_cfg;
-    // wnd_cfg.size_x = 100;
-    // wnd_cfg.size_y = 100;
+    wnd_cfg.size_x = 600;
+    wnd_cfg.size_y = 600;
 
-    // auto wnd_manager = new yg::window_config(wnd_cfg);
+    yg::window*         wnd_sdl    = new yg::window_sdl();
+    yg::render_context* ctx_opengl = new yg::render_context_opengl();
 
-    // while (true)
-    // {
-    // }
+    auto wnd_manager = new yg::window_manager(wnd_cfg, wnd_sdl, ctx_opengl);
+
+    while (true)
+    {
+    }
 }
 
 #endif

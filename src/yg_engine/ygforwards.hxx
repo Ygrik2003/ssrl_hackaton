@@ -1,6 +1,12 @@
-namespace yg
-{
-struct window_config;
+// #pragma once
 
-class window_manager;
-} // namespace yg
+// namespace yg
+// {
+// struct window_config;
+
+// class window;
+// class render_context;
+
+// class window_manager;
+
+// } // namespace yg

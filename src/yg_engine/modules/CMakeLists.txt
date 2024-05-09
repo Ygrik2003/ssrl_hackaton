@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.28)
 find_package(Vulkan REQUIRED)
 
 set(CMAKE_BUILD_TYPE Release)
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/SDL)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/SDL EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/glm)
 
 #imgui
@@ -22,16 +22,16 @@ set(imgui_src
 set(imgui_backand_src
     ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_sdl3.h
     ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_sdl3.cpp
-    # ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl2.h
-    # ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl2.cpp
-    # ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl3_loader.h
-    # ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl3.h
-    # ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl3.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl2.h
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl2.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl3_loader.h
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl3.h
+    ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_opengl3.cpp
     ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_vulkan.h
     ${CMAKE_CURRENT_LIST_DIR}/imgui/backends/imgui_impl_vulkan.cpp)
 
 add_library(imgui STATIC ${imgui_src} ${imgui_backand_src})
 target_include_directories(imgui PUBLIC ${CMAKE_CURRENT_LIST_DIR}/imgui)
-target_link_libraries(imgui PRIVATE SDL3::SDL3-shared Vulkan::Vulkan)
+target_link_libraries(imgui PRIVATE SDL3::SDL3 Vulkan::Vulkan libs::glad)
 set_target_properties(imgui PROPERTIES POSITION_INDEPENDENT_CODE ON)
 add_library(imgui::imgui ALIAS imgui)

@@ -1,7 +1,14 @@
 #include "window/window_manager.hxx"
 
-yg::window_manager::window_manager(window_config config)
+#include "window_manager.hxx"
+#include <SDL3/SDL.h>
+
+yg::window_manager::window_manager(window_config   config,
+                                   window*         backend,
+                                   render_context* ctx)
 {
-    SDL_Window* wnd =
-        SDL_CreateWindow("Tanchiki", config.size_x, config.size_y, 0);
+    backend->initialize(config);
+    ctx->initialize();
+
+    backend->capture_render_context(ctx);
 }
