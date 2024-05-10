@@ -35,7 +35,7 @@ protected:
 
 void bot::recive_damage(const player& enemy_player) noexcept
 {
-    if (hp > enemy_player.get_damage())
+    if (hp >= enemy_player.get_damage())
     {
 
         hp -= enemy_player.get_damage();
@@ -51,7 +51,7 @@ void bot::recive_damage(const player& enemy_player) noexcept
 
 void player::recive_damage(const bot& enemy_bot) noexcept
 {
-    if (hp > enemy_bot.get_damage())
+    if (hp >= enemy_bot.get_damage())
     {
 
         hp -= enemy_bot.get_damage();
