@@ -5,6 +5,7 @@
 #include <SDL3/SDL.h>
 
 #include "glad/glad.h"
+#include "vulkan/vulkan.h"
 
 yg::window_sdl::window_sdl(render_context::render_api render_api) noexcept
 {
@@ -31,9 +32,21 @@ yg::window::result_code yg::window_sdl::initialize(const window_config& config)
     return result_code::SUCCESS;
 }
 
-yg::window::result_code yg::window_sdl::process_events()
+bool yg::window_sdl::process_events()
 {
-    return result_code();
+    bool      is_alive = true;
+    SDL_Event sdl_event;
+
+    while (SDL_PollEvent(&sdl_event))
+    {
+        switch (sdl_event.type)
+        {
+            case SDL_EVENT_QUIT:
+                is_alive = false;
+                break;
+        }
+    }
+    return is_alive;
 }
 
 yg::window::result_code yg::window_sdl::capture_render_context(
@@ -42,7 +55,7 @@ yg::window::result_code yg::window_sdl::capture_render_context(
     switch (ctx->get_api())
     {
         case render_context::render_api::OpenGL:
-            gl_context = SDL_GL_CreateContext(wnd);
+            gl_context = SDL_GL_CreateContext(static_cast<SDL_Window*>(wnd));
             if (gl_context == nullptr)
             {
                 // std::cerr << SDL_GetError();
@@ -52,7 +65,7 @@ yg::window::result_code yg::window_sdl::capture_render_context(
             auto load_gl_func = [](const char* name)
             {
                 SDL_FunctionPointer gl_pointer = SDL_GL_GetProcAddress(name);
-                assert(gl_pointer == nullptr && "can't load GL function");
+                assert(gl_pointer != nullptr && "can't load GL function");
 
                 return reinterpret_cast<void*>(gl_pointer);
             };

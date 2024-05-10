@@ -17,6 +17,8 @@ struct window_config
 
     bool is_fullscreen;
     bool is_resizeble;
+
+    const uint8_t fps = 60;
 };
 #pragma pack(pop)
 
@@ -34,8 +36,9 @@ public:
         SDL
     };
     virtual result_code initialize(const window_config& config)     = 0;
-    virtual result_code process_events()                            = 0;
     virtual result_code capture_render_context(render_context* ctx) = 0;
+
+    virtual bool process_events() = 0;
 
     window_api get_api() const noexcept { return api; }
 

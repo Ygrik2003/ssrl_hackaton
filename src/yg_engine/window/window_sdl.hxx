@@ -2,8 +2,6 @@
 
 #include "window/window_manager.hxx"
 
-#include <SDL3/SDL.h>
-
 namespace yg
 {
 class window_sdl : public window
@@ -16,12 +14,13 @@ public:
     window_sdl(const window_sdl&& ctx) = delete;
 
     result_code initialize(const window_config& config) override;
-    result_code process_events() override;
     result_code capture_render_context(render_context* ctx) override;
 
+    bool process_events() override;
+
 private:
-    SDL_WindowFlags window_flags;
-    SDL_Window*     wnd;
-    SDL_GLContext   gl_context;
+    uint32_t window_flags;
+    void*    wnd;
+    void*    gl_context;
 };
 } // namespace yg

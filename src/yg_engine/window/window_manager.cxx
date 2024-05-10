@@ -8,7 +8,6 @@ yg::window_manager::window_manager(window_config   config,
                                    render_context* ctx)
 {
     backend->initialize(config);
-    ctx->initialize();
-
     backend->capture_render_context(ctx);
+    ctx->initialize();
 }
