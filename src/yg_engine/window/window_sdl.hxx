@@ -2,6 +2,8 @@
 
 #include "window/window_manager.hxx"
 
+#include <SDL3/SDL.h>
+
 namespace yg
 {
 class window_sdl : public window

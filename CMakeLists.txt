@@ -4,4 +4,10 @@ project(Tanchiki C CXX)
 
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
-add_subdirectory(src)
+option(YG_USE_EXAMPLE "Compile only examples" ON)
+
+if(${YG_USE_EXAMPLE})
+    add_subdirectory(examples)
+else()
+    add_subdirectory(src)
+endif()

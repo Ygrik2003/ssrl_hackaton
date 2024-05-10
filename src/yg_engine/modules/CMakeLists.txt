@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.28)
 
+# For Windows download VulkanSDK (https://www.lunarg.com/vulkan-sdk/)
+# and use env variable VULKAN_SDK=C:/VulkanSDK/1.3.280.0
 find_package(Vulkan REQUIRED)
 
 set(CMAKE_BUILD_TYPE Release)
