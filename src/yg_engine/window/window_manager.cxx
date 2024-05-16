@@ -3,11 +3,19 @@
 #include "window_manager.hxx"
 #include <SDL3/SDL.h>
 
+#include <cassert>
+
 yg::window_manager::window_manager(window_config   config,
                                    window*         backend,
                                    render_context* ctx)
 {
-    backend->initialize(config);
-    backend->capture_render_context(ctx);
-    ctx->initialize();
+
+    assert(backend->initialize(config) != window::result_code::ERROR &&
+           "Can't initialize window backend");
+
+    assert(backend->capture_render_context(ctx) != window::result_code::ERROR &&
+           "Can't capture render context");
+
+    assert(ctx->initialize() != render_context::result_code::ERROR &&
+           "Can't initialize render context");
 }

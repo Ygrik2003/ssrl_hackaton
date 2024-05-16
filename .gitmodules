@@ -7,3 +7,6 @@
 [submodule "modules/imgui"]
 	path = src/yg_engine/modules/imgui
 	url = https://github.com/ocornut/imgui
+[submodule "src/yg_engine/modules/Catch2"]
+	path = src/yg_engine/modules/Catch2
+	url = https://github.com/catchorg/Catch2

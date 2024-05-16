@@ -25,7 +25,7 @@ struct window_config
 class window
 {
 public:
-    enum result_code
+    enum [[nodiscard]] result_code
     {
         SUCCESS,
         ERROR

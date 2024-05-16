@@ -6,7 +6,13 @@ find_package(Vulkan REQUIRED)
 
 set(CMAKE_BUILD_TYPE Release)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/SDL EXCLUDE_FROM_ALL)
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/glm)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/glm EXCLUDE_FROM_ALL)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/Catch2 EXCLUDE_FROM_ALL)
+# list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
+# include(CTest)
+# include(Catch)
+# find_package(Catch2 3 REQUIRED)
 
 #imgui
 set(imgui_src

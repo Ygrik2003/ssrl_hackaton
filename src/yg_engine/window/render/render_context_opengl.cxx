@@ -1,5 +1,7 @@
 #include "render_context_opengl.hxx"
 
+#include "window/render/vertex_buffer.hxx"
+
 #include "glad/glad.h"
 
 yg::render_context::result_code yg::render_context_opengl::initialize()

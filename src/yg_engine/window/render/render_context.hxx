@@ -8,7 +8,7 @@ namespace yg
 class render_context
 {
 public:
-    enum result_code
+    enum [[nodiscard]] result_code
     {
         SUCCESS,
         ERROR
