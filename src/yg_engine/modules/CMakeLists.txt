@@ -4,15 +4,11 @@ cmake_minimum_required(VERSION 3.28)
 # and use env variable VULKAN_SDK=C:/VulkanSDK/1.3.280.0
 find_package(Vulkan REQUIRED)
 
-# Catch2 cant was added in subdirectory. Only in root.
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/Catch2)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/SDL)
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/glm)
-
-# list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
-# include(CTest)
-# include(Catch)
-# find_package(Catch2 3 REQUIRED)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/tracy)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/spdlog)
 
 #imgui
 set(imgui_src
