@@ -1,8 +1,5 @@
 #include "window/window_manager.hxx"
 
-#include "window_manager.hxx"
-#include <SDL3/SDL.h>
-
 #include <cassert>
 
 yg::window_manager::window_manager(window_config   config,

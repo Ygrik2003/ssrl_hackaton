@@ -10,3 +10,9 @@
 [submodule "src/yg_engine/modules/Catch2"]
 	path = src/yg_engine/modules/Catch2
 	url = https://github.com/catchorg/Catch2
+[submodule "src/yg_engine/modules/cpp-logger"]
+	path = src/yg_engine/modules/cpp-logger
+	url = git@github.com:balazs-bamer/cpp-logger.git
+[submodule "src/yg_engine/modules/tracy"]
+	path = src/yg_engine/modules/tracy
+	url = git@github.com:wolfpld/tracy.git
