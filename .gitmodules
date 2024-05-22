@@ -16,3 +16,6 @@
 [submodule "src/yg_engine/modules/spdlog"]
 	path = src/yg_engine/modules/spdlog
 	url = git@github.com:gabime/spdlog.git
+[submodule "src/yg_engine/modules/libassert"]
+	path = src/yg_engine/modules/libassert
+	url = git@github.com:jeremy-rifkin/libassert.git
