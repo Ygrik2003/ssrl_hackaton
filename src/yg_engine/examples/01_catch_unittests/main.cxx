@@ -8,7 +8,7 @@
 
 // 010-TestCase.cpp
 // And write tests in the same file:
-#include <catch2/catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 static int Factorial(int number)
 {
