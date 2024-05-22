@@ -9,6 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory(libs)
 add_subdirectory(modules)
 
+# add_subdirectory(examples)
+
 file(
     GLOB_RECURSE
     engine_sources
@@ -17,7 +19,7 @@ file(
     ${CMAKE_CURRENT_LIST_DIR}/*.hxx)
 list(REMOVE_ITEM engine_sources ${CMAKE_CURRENT_LIST_DIR}/main.cxx)
 
-add_library(yg_engine SHARED ${engine_sources})
+add_library(yg_engine OBJECT ${engine_sources})
 target_include_directories(yg_engine PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 target_link_libraries(
     yg_engine
